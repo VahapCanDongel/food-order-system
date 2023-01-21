@@ -28,21 +28,21 @@ export default function Dashboard() {
   return (
     <div className="w-full h-screen flex">
       {/* Navigation */}
-      <div className="flex flex-col w-[10%] h-full  border-r-[2px] border-black justify-evenly items-center">
+      <div className="flex flex-col w-[10%] h-full  border-r-[2px] border-teal-400 justify-evenly items-center">
         <button
-          className="text-xl border-[2px] border-black p-2 w-[150px] text-center"
+          className="text-xl rounded-md text-white p-2 w-[150px] text-center bg-teal-400"
           onClick={categoriesClick}
         >
           Categories
         </button>
         <button
-          className="text-xl border-[2px] border-black p-2 w-[150px] text-center"
+          className="text-xl rounded-md text-white p-2 w-[150px] text-center bg-teal-400"
           onClick={foodsClick}
         >
           Foods
         </button>
         <button
-          className="text-xl border-[2px] border-black p-2 w-[150px] text-center"
+          className="text-xl rounded-md text-white p-2 w-[150px] text-center bg-teal-400"
           onClick={extrasClick}
         >
           Extras

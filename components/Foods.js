@@ -6,7 +6,7 @@ export default function Foods() {
           <label className="text-xl">Name: </label>
           <input
             type="text"
-            className="border-[2px] border-black p-2 w-[240px]"
+            className="border-[2px] border-teal-400 p-2 w-[240px] rounded-md"
           />
         </div>
 
@@ -14,14 +14,14 @@ export default function Foods() {
           <label className="text-xl">Price: </label>
           <input
             type="text"
-            className="border-[2px] border-black p-2 w-[240px]"
+            className="border-[2px] border-teal-400 p-2 w-[240px] rounded-md"
           />
         </div>
 
         <div className="flex flex-col gap-2 justify-center">
           <label className="text-xl">Parent Category: </label>
 
-          <select className="border-[2px] border-black p-2 h-[44px] w-[240px]">
+          <select className="border-[2px] border-teal-400 p-2 h-[44px] w-[240px] rounded-md">
             <option>Test</option>
           </select>
         </div>
