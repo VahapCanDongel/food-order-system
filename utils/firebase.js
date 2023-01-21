@@ -15,3 +15,67 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
 export const db = getFirestore(app);
+
+/*
+  Rough databse structure as json
+  
+    user1:{
+        name: someName,
+        id: someId
+        photo: somePhoto,
+        categories:{
+          c1:{
+            name:'kebabs'
+            foods:[
+              f1:{
+                name: 'lamb doner',
+                price: 12.99,
+                extras:[
+                  salad,
+                  ketchup,
+                  mayo,
+                ]
+              },
+              f2:{
+                name: 'chicken doner',
+                price: 12.99,
+                extras:[
+                  salad,
+                  ketchup,
+                  mayo,
+                ]
+              }
+            ]
+          },
+
+            c2:{
+            name:'burgers'
+            foods:[
+              f1:{
+                name: 'chick burger',
+                price: 12.99,
+                extras:[
+                  salad,
+                  ketchup,
+                  mayo,
+                ]
+              },
+              f2:{
+                name: 'ham burger',
+                price: 12.99,
+                extras:[
+                  salad,
+                  ketchup,
+                  mayo,
+                ]
+              }
+            ]
+          }
+        }
+  }
+
+
+
+
+
+*/
