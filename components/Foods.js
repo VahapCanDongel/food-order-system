@@ -1,3 +1,7 @@
 export default function Foods() {
-  return <div>Foods</div>;
+  return (
+    <div className="w-full h-screen flex justify-center items-center">
+      Foods
+    </div>
+  );
 }
