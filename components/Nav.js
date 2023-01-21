@@ -9,17 +9,17 @@ export default function Navigation() {
 
   return (
     <div>
-      <div className="w-full h-[80px] bg-teal-700 flex justify-between items-center p-3">
+      <div className="w-full h-[80px] shadow-lg flex justify-between items-center p-3">
         <Link href="/" className="flex justify-center items-center gap-8">
-          <button className="text-white text-3xl">Food Order System</button>
+          <button className="text-black text-3xl">Food Order System</button>
           {user && (
-            <div className="flex text-white">
+            <div className="flex text-black">
               <div>Welcome {user.displayName}</div>
             </div>
           )}
         </Link>
 
-        <ul className="flex gap-4 text-white">
+        <ul className="flex gap-4 text-black">
           {user ? (
             <div className="flex gap-4">
               <Link
