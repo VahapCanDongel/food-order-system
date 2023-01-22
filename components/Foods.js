@@ -5,6 +5,8 @@ import {
   arrayUnion,
   collection,
   doc,
+  getDoc,
+  getDocs,
   onSnapshot,
   query,
   setDoc,
@@ -12,6 +14,7 @@ import {
   where, //We need to use this select only elements from the document that matches the user id
 } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Foods() {
   const [itemName, setItemName] = useState({ description: "" });
@@ -30,20 +33,34 @@ export default function Foods() {
       user: user.uid,
       user_name: user.displayName,
       user_email: user.email,
-      food: [],
+      food: [
+        {
+          id: uuidv4(),
+          name: itemName,
+          price: itemPrice,
+          parent_category: parentCategory,
+        },
+      ],
     });
   };
 
   const updateFoodArray = async (e) => {
     e.preventDefault();
+
+    const docCollection = collection(db, "users");
     const documentRef = doc(db, "users", user.uid);
-    await updateDoc(documentRef, {
-      food: arrayUnion({
-        name: itemName,
-        price: itemPrice,
-        parent_category: parentCategory,
-      }),
-    });
+    if ((await (await getDocs(docCollection)).empty) == true) {
+      submitFoodForm(e);
+    } else {
+      await updateDoc(documentRef, {
+        food: arrayUnion({
+          id: uuidv4(),
+          name: itemName,
+          price: itemPrice,
+          parent_category: parentCategory,
+        }),
+      });
+    }
   };
 
   const getData = async () => {
@@ -122,6 +139,9 @@ export default function Foods() {
             <tr>
               <td className="border-[2px] border-black">
                 {item.name.description}
+                <button className="bg-red-400 text-white text-center rounded-md ml-4 h-[25px] w-[80px]">
+                  Delete
+                </button>
               </td>
               <td className="border-[2px] border-black">
                 {item.price.description}
