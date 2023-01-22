@@ -2,7 +2,6 @@ import { auth, db } from "@/utils/firebase";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import {
-  addDoc,
   arrayUnion,
   collection,
   doc,
@@ -10,11 +9,9 @@ import {
   query,
   setDoc,
   updateDoc,
-  where,
-  getDoc,
+  where, //We need to use this select only elements from the document that matches the user id
 } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { async } from "@firebase/util";
 
 export default function Foods() {
   const [itemName, setItemName] = useState({ description: "" });
