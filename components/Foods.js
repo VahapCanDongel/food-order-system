@@ -2,6 +2,7 @@ import { auth, db } from "@/utils/firebase";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import {
+  arrayRemove,
   arrayUnion,
   collection,
   doc,
@@ -21,6 +22,7 @@ export default function Foods() {
   const [itemPrice, setItemPrice] = useState({ description: "" });
   const [parentCategory, setParentCategory] = useState({ description: "" });
   const [allFoods, setAllFoods] = useState([]);
+  const [itemID, setItemID] = useState(0);
 
   const [user, loading] = useAuthState(auth);
   const route = useRouter();
@@ -61,6 +63,15 @@ export default function Foods() {
         }),
       });
     }
+  };
+
+  const checkingItemID = async (itemID) => {
+    setItemID(itemID);
+    const documentRef = doc(db, "users", user.uid);
+    await updateDoc(documentRef, {
+      food: arrayRemove(itemID),
+    });
+    console.log(itemID);
   };
 
   const getData = async () => {
@@ -132,6 +143,7 @@ export default function Foods() {
           <th className="border-[2px] border-black">Price</th>
           <th className="border-[2px] border-black">Parent Category</th>
           <th className="border-[2px] border-black">Extras</th>
+          <th className="border-[2px] border-black">Operations</th>
         </tr>
 
         {allFoods.map((food) =>
@@ -139,9 +151,6 @@ export default function Foods() {
             <tr>
               <td className="border-[2px] border-black">
                 {item.name.description}
-                <button className="bg-red-400 text-white text-center rounded-md ml-4 h-[25px] w-[80px]">
-                  Delete
-                </button>
               </td>
               <td className="border-[2px] border-black">
                 {item.price.description}
@@ -150,6 +159,14 @@ export default function Foods() {
                 {item.parent_category.description}
               </td>
               <td className="border-[2px] border-black"></td>
+              <td className="border-[2px] border-black">
+                <button
+                  className="bg-red-400 text-white text-center rounded-md ml-4 h-[25px] w-[80px]"
+                  onClick={() => checkingItemID(item)}
+                >
+                  Delete
+                </button>
+              </td>
             </tr>
           ))
         )}
