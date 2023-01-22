@@ -1,9 +1,25 @@
 import Categories from "@/components/Categories";
 import Extras from "@/components/Extras";
 import Foods from "@/components/Foods";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/utils/firebase";
+import { useRouter } from "next/router";
 
 export default function Dashboard() {
+  const route = useRouter();
+  const [user, loading] = useAuthState(auth);
+  const getData = async () => {
+    if (loading) return;
+    if (!user) {
+      return route.push("/auth/login");
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, [user, loading]);
+
   const [category_visbility, setCategoryVisibility] = useState(false);
   const [food_visbility, setFoodVisibility] = useState(false);
   const [extra_visbility, setExtraVisibility] = useState(false);
