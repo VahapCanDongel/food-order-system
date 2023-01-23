@@ -37,11 +37,6 @@ export default function Foods() {
       user: user.uid,
       user_name: user.displayName,
       user_email: user.email,
-      category: [
-        {
-          food: [],
-        },
-      ],
     });
   };
 
@@ -49,19 +44,15 @@ export default function Foods() {
     e.preventDefault();
 
     const docCollection = collection(db, "users");
-    const documentRef = doc(db, "users", user.uid);
+    const documentRef = doc(db, "users", user.uid, "categories");
     if ((await (await getDocs(docCollection)).empty) == true) {
       submitFoodForm(e);
     } else {
-      await updateDoc(documentRef, {
-        categor: arrayUnion({
-          food: arrayUnion({
-            id: uuidv4(),
-            name: itemName,
-            price: itemPrice,
-            parent_category: parentCategory,
-          }),
-        }),
+      await setDoc(documentRef, {
+        categor: {
+          c_id: uuidv4(),
+          name: categoryName,
+        },
       });
     }
   };
