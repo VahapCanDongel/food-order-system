@@ -5,7 +5,7 @@ export default function Layout({ children }) {
     <div className="w-full h-screen font-lexend">
       <Navigation />
 
-      <main>{children}</main>
+      <main className="bg-slate-50">{children}</main>
     </div>
   );
 }

@@ -149,7 +149,7 @@ export default function Foods() {
               </div>
               {addCategoryStatus && (
                 <div
-                  className="bg-teal-500 text-white p-3 rounded-md h-[40px] hover:cursor-pointer flex justify-center items-center text-xs"
+                  className="bg-sky-900 text-white p-3 rounded-md h-[40px] hover:cursor-pointer flex justify-center items-center text-xs"
                   onClick={updateCategoryArray}
                 >
                   Add Category
@@ -187,7 +187,7 @@ export default function Foods() {
           {!addCategoryStatus && (
             <div
               onClick={updateFoodArray}
-              className="bg-teal-500 text-white p-3 rounded-md h-[40px] hover:cursor-pointer flex justify-center items-center text-xs"
+              className="bg-sky-900 text-white p-3 rounded-md h-[40px] hover:cursor-pointer flex justify-center items-center text-xs"
             >
               Add Food
             </div>
@@ -214,12 +214,12 @@ export default function Foods() {
               className="border-[1px] p-2 w-[240px] rounded-md shadow-md outline-none"
             />
 
-            <div className="bg-teal-500 text-white p-3 rounded-md h-[40px] hover:cursor-pointer flex justify-center items-center text-xs mt-auto">
+            <div className="bg-sky-900 text-white p-3 rounded-md h-[40px] hover:cursor-pointer flex justify-center items-center text-xs mt-auto">
               Add
             </div>
           </div>
 
-          <div className="w-[300px] bg-teal-500 min-h-[100px] rounded-md flex justify-center p-1">
+          <div className="w-[300px] bg-sky-900 min-h-[100px] rounded-md flex justify-center p-1">
             <div className="text-xs bg-white w-[80px] flex justify-center items-center rounded-sm h-[20px]">
               <button>
                 <svg
@@ -241,27 +241,27 @@ export default function Foods() {
             </div>
           </div>
 
-          <div className="bg-teal-500 text-white p-3 rounded-md h-[40px] hover:cursor-pointer flex justify-center items-center text-xs mt-auto">
+          <div className="bg-sky-900 text-white p-3 rounded-md h-[40px] hover:cursor-pointer flex justify-center items-center text-xs mt-auto">
             Complete
           </div>
         </form>
       </div>
 
-      {/* <table className="border-[1px] border-teal-500 w-[800px] text-center">
-        <tr className="border-[2px] border-teal-500">
-          <th className="border-[2px] border-b-black border-t-black border-l-black bg-teal-500 text-white">
+      {/* <table className="border-[1px] border-sky-900 w-[800px] text-center">
+        <tr className="border-[2px] border-sky-900">
+          <th className="border-[2px] border-b-black border-t-black border-l-black bg-sky-900 text-white">
             Name
           </th>
-          <th className="border-[2px] border-b-black border-t-black bg-teal-500 text-white">
+          <th className="border-[2px] border-b-black border-t-black bg-sky-900 text-white">
             Price
           </th>
-          <th className="border-[2px] border-b-black border-t-black bg-teal-500 text-white">
+          <th className="border-[2px] border-b-black border-t-black bg-sky-900 text-white">
             Parent Category
           </th>
-          <th className="border-[2px] border-b-black border-t-black bg-teal-500 text-white">
+          <th className="border-[2px] border-b-black border-t-black bg-sky-900 text-white">
             Extras
           </th>
-          <th className="border-[2px] border-b-black border-t-black border-r-black bg-teal-500 text-white">
+          <th className="border-[2px] border-b-black border-t-black border-r-black bg-sky-900 text-white">
             Operations
           </th>
         </tr>
@@ -269,17 +269,17 @@ export default function Foods() {
         {allFoods.map((food) =>
           food.food.map((item) => (
             <tr>
-              <td className="border-[2px] border-teal-500">
+              <td className="border-[2px] border-sky-900">
                 {item.name.description}
               </td>
-              <td className="border-[2px] border-teal-500">
+              <td className="border-[2px] border-sky-900">
                 {item.price.description}
               </td>
-              <td className="border-[2px] border-teal-500">
+              <td className="border-[2px] border-sky-900">
                 {item.parent_category.description}
               </td>
-              <td className="border-[2px] border-teal-500"></td>
-              <td className="border-[2px] border-teal-500">
+              <td className="border-[2px] border-sky-900"></td>
+              <td className="border-[2px] border-sky-900">
                 <button
                   className="bg-red-300 text-white text-center rounded-md ml-4 h-[25px] w-[80px] hover:bg-red-400"
                   onClick={() => checkingItemID(item)}
