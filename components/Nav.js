@@ -45,7 +45,7 @@ export default function Navigation() {
           ) : (
             <Link
               href="/auth/login"
-              className="w-[100px] bg-teal-400 p-2 rounded-md text-center"
+              className="w-[100px] bg-blue-300 p-2 rounded-md text-center text-white"
             >
               Sign In
             </Link>

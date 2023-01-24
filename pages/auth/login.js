@@ -4,7 +4,8 @@ import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect } from "react";
 import { FcGoogle } from "react-icons/fc";
-
+import Image from "next/image";
+import LoginImage from "../asset/login_image.svg";
 export default function Login() {
   const route = useRouter();
   const [user, loading] = useAuthState(auth);
@@ -29,16 +30,18 @@ export default function Login() {
   }, [user]);
 
   return (
-    <div className="w-full h-screen flex justify-center items-center">
-      <div className="w-[500px] h-[500px] shadow-lg p-4 flex flex-col justify-center items-center gap-8 border-[2px] border-black border-dashed">
-        <div className="text-4xl">
+    <div className="w-full h-screen flex justify-center items-center gap-20">
+      <Image src={LoginImage} width="350px" height="300px" />
+
+      <div className="w-[700px] h-[700px] p-4 flex flex-col justify-center items-center gap-20">
+        <div className="text-[50px]">
           Manage Your Takeaway Orders On The Web, Anywhere!
         </div>
-        <div className="text-xl">Join Today!</div>
-        <div>Sign in with one of the providers</div>
+        <div className="text-3xl mr-auto">Join Today!</div>
+        <div className="text-2xl">Sign in with one of the providers</div>
         <button
           onClick={GoogleLogin}
-          className="bg-black text-white p-3 rounded-md flex gap-3 w-[200px] justify-center items-center"
+          className="bg-black text-white p-3 rounded-md flex gap-3 w-[340px] justify-center items-center"
         >
           <FcGoogle className="text-2xl" />
           Google
