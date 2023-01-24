@@ -194,7 +194,7 @@ export default function Foods() {
           )}
         </form>
 
-        <form className="flex flex-col justify-evenly items-center gap-10 w-[400px] p-4 rounded-md shadow-xl border-[1px] border-teal-400">
+        <form className="flex flex-col justify-evenly items-center gap-10 w-[400px] p-4 rounded-md shadow-xl border-[1px]">
           <div className="flex flex-col gap-2 justify-center">
             <label className="text-sm">Selected Food:</label>
 
