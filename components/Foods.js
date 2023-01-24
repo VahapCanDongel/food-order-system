@@ -26,8 +26,14 @@ export default function Foods() {
 
   const [categoryName, setCategoryName] = useState({ description: "" });
 
+  const [addCategoryStatus, setAddCategoryStatus] = useState(false);
+
   const [user, loading] = useAuthState(auth);
   const route = useRouter();
+
+  const changeCategoryStatus = (e) => {
+    console.log(e);
+  };
 
   const generalFormSubmit = async (e) => {
     e.preventDefault();
@@ -59,6 +65,8 @@ export default function Foods() {
 
   const updateCategoryArray = async (e) => {
     e.preventDefault();
+
+    console.log("Clickedd");
 
     const docCollection = collection(db, "users");
     const documentRef = doc(db, "users", user.uid);
@@ -101,81 +109,96 @@ export default function Foods() {
     <div className="w-full h-screen flex justify-evenly flex-col items-center">
       {/* Add Food Form */}
       <div className="flex  gap-5">
-        <form className="flex flex-col justify-evenly items-center gap-10 w-[400px] p-4 rounded-md shadow-xl border-[1px] border-teal-400">
-          <div className="flex flex-col gap-2 justify-center">
-            <label className="text-xl"> Category Name: </label>
-            <input
-              onChange={(e) => {
-                setCategoryName({
-                  ...categoryName,
-                  description: e.target.value,
-                });
-              }}
-              type="text"
-              className="border-[2px] border-teal-400 p-2 w-[240px] rounded-md"
-            />
+        <form className="flex flex-col justify-evenly  gap-10 w-[400px] p-4 rounded-md shadow-xl border-[1px] ">
+          <div className="flex gap-2">
+            <div className="flex flex-col gap-2 justify-center">
+              <label className="text-sm ml-1">Category</label>
+              {addCategoryStatus ? (
+                <input
+                  onChange={(e) => {
+                    setCategoryName({
+                      ...categoryName,
+                      description: e.target.value,
+                    });
+                  }}
+                  type="text"
+                  placeholder="Category Name"
+                  className="border-[1px] p-2 w-[240px] rounded-md shadow-md outline-none text-sm disabled:bg-slate-100"
+                />
+              ) : (
+                <select className="border-[1px] p-2 w-[240px] rounded-md shadow-md outline-none text-sm">
+                  <option>Test</option>
+                </select>
+              )}
+
+              <div className="text-xs rounded-sm w-[140px] flex justify-center items-center gap-1">
+                <input
+                  type="checkbox"
+                  className="border-none"
+                  onChange={() => {
+                    if (addCategoryStatus == false) {
+                      setAddCategoryStatus(true);
+                    } else {
+                      setAddCategoryStatus(false);
+                    }
+
+                    console.log("changed");
+                  }}
+                />
+                Insert new cateogry
+              </div>
+              {addCategoryStatus && (
+                <div
+                  className="bg-teal-500 text-white p-3 rounded-md h-[40px] hover:cursor-pointer flex justify-center items-center text-xs"
+                  onClick={updateCategoryArray}
+                >
+                  Add Category
+                </div>
+              )}
+            </div>
           </div>
 
-          <button
-            className="bg-teal-500 text-white p-3 rounded-md"
-            onClick={updateCategoryArray}
-          >
-            Add Category
-          </button>
-        </form>
-
-        <form className="flex flex-col justify-evenly items-center gap-10 w-[400px] p-4 rounded-md shadow-xl border-[1px] border-teal-400">
           <div className="flex flex-col gap-2 justify-center">
-            <label className="text-xl">Food Name: </label>
+            <label className="text-sm ml-1">Food Name</label>
             <input
               onChange={(e) =>
                 setItemName({ ...itemName, description: e.target.value })
               }
               type="text"
-              className="border-[2px] border-teal-400 p-2 w-[240px] rounded-md"
+              placeholder="Food Name"
+              className="border-[1px] p-2 w-[240px] rounded-md shadow-md outline-none text-sm"
+              disabled={addCategoryStatus ? "disabled" : ""}
             />
           </div>
 
           <div className="flex flex-col gap-2 justify-center">
-            <label className="text-xl">Food Price: </label>
+            <label className="text-sm ml-1">Food Price </label>
             <input
               onChange={(e) =>
                 setItemPrice({ ...itemPrice, description: e.target.value })
               }
               type="text"
-              className="border-[2px] border-teal-400 p-2 w-[240px] rounded-md"
+              placeholder="£"
+              className="border-[1px] p-2 w-[240px] rounded-md shadow-md outline-none text-sm"
+              disabled={addCategoryStatus ? "disabled" : ""}
             />
           </div>
 
-          <div className="flex flex-col gap-2 justify-center">
-            <label className="text-xl">Parent Category: </label>
-
-            <select
-              onChange={(e) =>
-                setParentCategory({
-                  ...parentCategory,
-                  description: e.target.value,
-                })
-              }
-              className="border-[2px] border-teal-400 p-2 h-[44px] w-[240px] rounded-md"
+          {!addCategoryStatus && (
+            <div
+              onClick={updateFoodArray}
+              className="bg-teal-500 text-white p-3 rounded-md h-[40px] hover:cursor-pointer flex justify-center items-center text-xs"
             >
-              <option>Test</option>
-            </select>
-          </div>
-
-          <button
-            onClick={updateFoodArray}
-            className="bg-teal-500 text-white p-3 rounded-md"
-          >
-            Add Food
-          </button>
+              Add Food
+            </div>
+          )}
         </form>
 
         <form className="flex flex-col justify-evenly items-center gap-10 w-[400px] p-4 rounded-md shadow-xl border-[1px] border-teal-400">
           <div className="flex flex-col gap-2 justify-center">
-            <label className="text-xl">Selected Food:</label>
+            <label className="text-sm">Selected Food:</label>
 
-            <select className="border-[2px] border-teal-400 p-2 h-[44px] w-[240px] rounded-md">
+            <select className="border-[1px] p-2 w-[240px] rounded-md shadow-md outline-none">
               {allFoods.map((item) => {
                 item.category.map((food) => {
                   <option>food</option>;
@@ -185,18 +208,18 @@ export default function Foods() {
           </div>
 
           <div className="flex flex-col gap-2 justify-center">
-            <label className="text-xl">Extra Item Name: </label>
+            <label className="text-sm">Extra Item Name: </label>
             <input
               type="text"
-              className="border-[2px] border-teal-400 p-2 w-[240px] rounded-md"
+              className="border-[1px] p-2 w-[240px] rounded-md shadow-md outline-none"
             />
 
-            <button className="bg-teal-400 text-white p-3 w-[90px] rounded-md">
+            <div className="bg-teal-500 text-white p-3 rounded-md h-[40px] hover:cursor-pointer flex justify-center items-center text-xs mt-auto">
               Add
-            </button>
+            </div>
           </div>
 
-          <div className="w-[300px] bg-teal-400 min-h-[100px] rounded-md flex justify-center p-1">
+          <div className="w-[300px] bg-teal-500 min-h-[100px] rounded-md flex justify-center p-1">
             <div className="text-xs bg-white w-[80px] flex justify-center items-center rounded-sm h-[20px]">
               <button>
                 <svg
@@ -218,9 +241,9 @@ export default function Foods() {
             </div>
           </div>
 
-          <button className="bg-teal-500 text-white p-3 rounded-md">
+          <div className="bg-teal-500 text-white p-3 rounded-md h-[40px] hover:cursor-pointer flex justify-center items-center text-xs mt-auto">
             Complete
-          </button>
+          </div>
         </form>
       </div>
 
