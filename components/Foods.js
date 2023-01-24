@@ -186,7 +186,7 @@ export default function Foods() {
               onChange={(e) =>
                 setItemPrice({ ...itemPrice, description: e.target.value })
               }
-              type="text"
+              type="number"
               placeholder="£"
               className="border-[1px] p-2 w-[240px] rounded-md shadow-md outline-none text-sm"
               disabled={addCategoryStatus ? "disabled" : ""}
@@ -214,11 +214,11 @@ export default function Foods() {
             <label className="text-sm">Selected Food:</label>
 
             <select className="border-[1px] p-2 w-[240px] rounded-md shadow-md outline-none">
-              {allFoods.map((item) => {
+              {/* {allFoods.map((item) => {
                 item.category.map((food) => {
                   <option>food</option>;
                 });
-              })}
+              })} */}
             </select>
           </div>
 
