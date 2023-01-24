@@ -27,6 +27,8 @@ export default function Foods() {
   const [categoryName, setCategoryName] = useState({ description: "" });
 
   const [addCategoryStatus, setAddCategoryStatus] = useState(false);
+  const [docuEmptyErrorMessageTrigger, setDocEmptyErrorMessageTrigger] =
+    useState(false);
 
   const [user, loading] = useAuthState(auth);
   const route = useRouter();
@@ -159,7 +161,14 @@ export default function Foods() {
           </div>
 
           <div className="flex flex-col gap-2 justify-center">
-            <label className="text-sm ml-1">Food Name</label>
+            <label className="text-sm ml-1 flex flex-col">
+              Food Name
+              {docuEmptyErrorMessageTrigger && (
+                <div className="text-red-400 text-xs">
+                  Please insert or, select a category to add food!
+                </div>
+              )}
+            </label>
             <input
               onChange={(e) =>
                 setItemName({ ...itemName, description: e.target.value })
@@ -186,7 +195,13 @@ export default function Foods() {
 
           {!addCategoryStatus && (
             <div
-              onClick={updateFoodArray}
+              onClick={() => {
+                if (allFoods.length > 0) {
+                  updateFoodArray;
+                } else {
+                  setDocEmptyErrorMessageTrigger(true);
+                }
+              }}
               className="bg-sky-900 text-white p-3 rounded-md h-[40px] hover:cursor-pointer flex justify-center items-center text-xs"
             >
               Add Food
