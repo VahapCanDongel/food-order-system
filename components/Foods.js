@@ -2,8 +2,6 @@ import { auth, db } from "@/utils/firebase";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { v4 as uuidv4 } from "uuid";
-import { connectToDatabase } from "@/utils/mongodb";
 
 export default function Foods() {
   const [itemName, setItemName] = useState({ description: "" });
