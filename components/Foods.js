@@ -1,21 +1,9 @@
 import { auth, db } from "@/utils/firebase";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import {
-  arrayRemove,
-  arrayUnion,
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  onSnapshot,
-  query,
-  setDoc,
-  updateDoc,
-  where, //We need to use this select only elements from the document that matches the user id
-} from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { v4 as uuidv4 } from "uuid";
+import { connectToDatabase } from "@/utils/mongodb";
 
 export default function Foods() {
   const [itemName, setItemName] = useState({ description: "" });
@@ -33,10 +21,6 @@ export default function Foods() {
   const [user, loading] = useAuthState(auth);
   const route = useRouter();
 
-  const changeCategoryStatus = (e) => {
-    console.log(e);
-  };
-
   const generalFormSubmit = async (e) => {
     e.preventDefault();
     const documentRef = doc(db, "users", user.uid);
@@ -47,65 +31,6 @@ export default function Foods() {
       user_email: user.email,
     });
   };
-
-  const updateFoodArray = async (e) => {
-    e.preventDefault();
-
-    const docCollection = collection(db, "users");
-    const documentRef = doc(db, "users", user.uid, "categories");
-    if ((await (await getDocs(docCollection)).empty) == true) {
-      submitFoodForm(e);
-    } else {
-      await setDoc(documentRef, {
-        categor: {
-          c_id: uuidv4(),
-          name: categoryName,
-        },
-      });
-    }
-  };
-
-  const updateCategoryArray = async (e) => {
-    e.preventDefault();
-
-    console.log("Clickedd");
-
-    const docCollection = collection(db, "users");
-    const documentRef = doc(db, "users", user.uid);
-    if ((await (await getDocs(docCollection)).empty) == true) {
-      generalFormSubmit(e);
-    } else {
-      await updateDoc(documentRef, {
-        category: arrayUnion({
-          id: uuidv4(),
-          name: categoryName,
-          food: [],
-        }),
-      });
-    }
-  };
-  const checkingItemID = async (itemID) => {
-    setItemID(itemID);
-    const documentRef = doc(db, "users", user.uid);
-    await updateDoc(documentRef, {
-      food: arrayRemove(itemID),
-    });
-    console.log(itemID);
-  };
-
-  const getData = async () => {
-    const getDataCollectionRef = collection(db, "users");
-    const q = query(getDataCollectionRef);
-
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      setAllFoods(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    });
-    return unsubscribe;
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   return (
     <div className="w-full h-screen flex justify-evenly flex-col items-center">
@@ -152,7 +77,7 @@ export default function Foods() {
               {addCategoryStatus && (
                 <div
                   className="bg-sky-900 text-white p-3 rounded-md h-[40px] hover:cursor-pointer flex justify-center items-center text-xs"
-                  onClick={updateCategoryArray}
+                  // onClick={updateCategoryArray}
                 >
                   Add Category
                 </div>
