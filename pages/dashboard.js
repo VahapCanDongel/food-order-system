@@ -1,5 +1,5 @@
 import Foods from "@/components/Foods";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/utils/firebase";
 import { useRouter } from "next/router";

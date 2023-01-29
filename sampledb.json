@@ -1,0 +1,30 @@
+{
+    "categoriess": {
+        "kebabs" :{
+            "foods" :[
+                {
+                    "f1" :{
+                        "name" : "Lamb Doner",
+                        "price" : 10.99,
+                        "extras" : ["All Salad", "All Sauce"]
+                    }
+                }
+            ]
+        },
+
+        "burgers" :{
+            "foods" :[
+                {
+                    "b1" :{
+                        "name" : "Chicken Burger",
+                        "price" : 10.99,
+                        "extras" : ["All Salad", "All Sauce"]
+                    }
+                }
+            ]
+        }
+    }
+
+
+
+}
